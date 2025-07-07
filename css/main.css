@@ -29,10 +29,7 @@
   z-index: 999;
 }
 
-.legend-title {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
+
 .hero-section {
   position: relative;
   background-image: url('../images/download.jpg'); /* Your image */

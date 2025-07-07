@@ -14,6 +14,31 @@
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/font-awesome/css/all.min.css" />
   <link rel="stylesheet" href="css/main.css" />
+  
+  <style>
+    /* Style for the text container */
+    .text-box {
+      background: rgba(255, 255, 255, 0.8);  /* White background with 80% opacity */
+      padding: 30px;
+      border-radius: 20px;  /* Rounded corners */
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  /* Optional: Adds a soft shadow */
+      margin-top: 30px;
+    }
+
+    .text-box h1 {
+      font-weight: 700; /* Make the heading bold */
+      color: #333;
+    }
+
+    .text-box p {
+      font-size: 1.1em; /* Slightly larger text */
+      color: #555;
+    }
+
+    .text-box .btn {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body id="top">
   <div class="page">
@@ -23,7 +48,7 @@
       <div class="pp-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
-            <a class="navbar-brand" href="index.html">Air Quality Project</a>
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -43,71 +68,68 @@
     <!-- Main Content -->
     <div class="page-content">
       <div class="container py-5">
-        <h1 class="text-center mb-4">Welcome to Our Air Quality WebGIS</h1>
-        <!-- Background Image Section -->
-<div class="hero-section">
-  <div class="hero-overlay">
-    <div class="hero-text">
-      <h1>Explore Air Quality in Italy</h1>
-      <p>
-        This WebGIS visualizes NO₂, PM₁₀, and PM₂.₅ levels across Italy using QGIS, GeoServer, and OpenLayers.
-        Discover spatial and temporal trends in air pollution and its impact.
-      </p>
-      <div class="mt-3">
-        <a href="results.html" class="btn btn-primary m-2">View Results</a>
-        <a href="webmap.html" class="btn btn-success m-2">Launch Web Map</a>
+
+        <!-- Text Box Container -->
+        <div class="text-box">
+          <h1 class="text-center mb-4">Welcome to Our Air Quality WebGIS</h1>
+
+          <!-- Background Image Section -->
+          <div class="hero-section">
+            <div class="hero-overlay">
+              <div class="hero-text">
+                <h1>Explore Air Quality in Italy</h1>
+                <div class="mt-3">
+                  <a href="results.html" class="btn btn-primary m-2">View Results</a>
+                  <a href="webmap.html" class="btn btn-success m-2">Launch Web Map</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-center lead">Explore interactive maps and analysis of air pollution across Italy using GeoServer, OpenLayers.</p>
+          <p class="text-center">
+            Air pollution poses a significant risk to public health and the environment, especially in urban and industrial regions. In Italy, pollutants such as nitrogen dioxide (NO₂), particulate matter (PM₁₀ and PM₂.₅) frequently exceed recommended limits, particularly in the Po Valley and metropolitan areas. These elevated levels contribute to respiratory illnesses, cardiovascular issues, and reduced quality of life.
+          </p>
+          <p class="text-center">
+            This WebGIS project offers a spatial analysis of air quality across Italy QGIS-based map styling, GeoServer publishing, and OpenLayers integration. It enables users to explore pollutant concentrations through interactive maps with dynamic legends, layer switchers, and clear visualizations. The platform aims to support data-driven decision-making, raise awareness, and promote environmental monitoring and policy planning.
+          </p>
+
+          <div class="text-center mt-5">
+            <a href="results.html" class="btn btn-primary btn-lg m-2">View Results</a>
+            <a href="webmap.html" class="btn btn-success btn-lg m-2">Launch Web Map</a>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-</div>
-
-        <p class="text-center lead">Explore interactive maps and analysis of air pollution across Italy using GeoServer, OpenLayers.
-     </p>
-     <p class="text-center">
-     Air pollution poses a significant risk to public health and the environment, especially in urban and industrial regions. In Italy, pollutants such as nitrogen dioxide (NO₂), particulate matter (PM₁₀ and PM₂.₅) frequently exceed recommended limits, particularly in the Po Valley and metropolitan areas. These elevated levels contribute to respiratory illnesses, cardiovascular issues, and reduced quality of life.
-     </p>
-     <p class="text-center">
-     This WebGIS project offers a spatial analysis of air quality across Italy QGIS-based map styling, GeoServer publishing, and OpenLayers integration. It enables users to explore pollutant concentrations through interactive maps with dynamic legends, layer switchers, and clear visualizations. The platform aims to support data-driven decision-making, raise awareness, and promote environmental monitoring and policy planning.
-     </p>
-
-        <div class="text-center mt-5">
-          <a href="results.html" class="btn btn-primary btn-lg m-2">View Results</a>
-          <a href="webmap.html" class="btn btn-success btn-lg m-2">Launch Web Map</a>
+    
+    <!-- Info Boxes Section -->
+    <div class="container py-5">
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="info-box p-4 h-100">
+            <h4>Danila Larionov</h4>
+            <p>Master student of Urban planning and policy design<br>Politecnico di Milano</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="info-box p-4 h-100">
+            <h4>Mobina Faraji</h4>
+            <img src="images/mobina.jpg" class="img-fluid rounded mb-2" alt="Mobina" />
+            <p>Master student of Geoinformatics Engineering<br>Politecnico di Milano</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="info-box p-4 h-100">
+            <h4>Patrick Logan Kennedy</h4>
+            <ul class="list-unstyled">
+              <li>Master student of Urban planning and policy design</li>
+              <li>Politecnico di Milano</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Info Boxes Section -->
-<div class="container py-5">
-  <div class="row text-center">
-    <div class="col-md-4 mb-4">
-      <div class="info-box p-4 h-100">
-        <h4>Danila Larionov</h4>
-        <p>Master student of Urban planning and policy design
-            Politecnico di Milano
-        </p>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="info-box p-4 h-100">
-        <h4>Mobina Faraji</h4>
-       <img src="images/mobina.jpg" class="img-fluid rounded mb-2" alt="Mobina" />
-        <p>
-            Master student of Geoinformatics Engineering
-            Politecnico di Milano</p>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="info-box p-4 h-100">
-        <h4>Patrick logan Kennedy</h4>
-        <ul class="list-unstyled">
-          <li>Master student of Urban planning and policy design</li>
-          <li>politecnico di Milano</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
 
     <!-- Footer -->
     <footer class="pp-footer">
