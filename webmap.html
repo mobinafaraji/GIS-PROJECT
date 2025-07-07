@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebGIS Map with Dynamic Legend</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher/dist/ol-layerswitcher.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Back Button -->
+  <div class="container">
+    <button class="btn btn-secondary mb-4" onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map" class="map"></div>
+
+  <!-- Dynamic Legend (bottom-left) -->
+  <div id="legend" class="legend-box"></div>
+
+  <!-- Mouse Coordinates (bottom-right) -->
+  <div id="mouse-position" class="mouse-position"></div>
+
+  <!-- OpenLayers & LayerSwitcher scripts -->
+  <script type="module" src="scripts/main.js"></script>
+
+  <!-- Back Button Script -->
+  <script>
+    function goBack() {
+      window.history.back(); // This will take the user to the previous page
+    }
+  </script>
+
+</body>
+</html>

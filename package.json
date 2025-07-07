@@ -2,6 +2,7 @@
   "name": "photo-perfect",
   "version": "1.0.0",
   "description": "",
+  "main": "index.html",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vite": "^6.3.5"
+    "vite": "^4.0.0"
+  },
+  "dependencies": {
+    "ol-layerswitcher": "^4.1.2"
   }
 }

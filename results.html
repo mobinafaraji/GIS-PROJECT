@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      color: #333;
+    }
+    .content-section {
+      display: none; /* Hide all content sections by default */
+    }
+    .active {
+      display: block; /* Show active content section */
+    }
+    /* Add custom spacing between the buttons */
+    .btn-group .btn {
+      margin-right: 2mm; /* 2mm space between buttons */
+    }
+    /* Remove margin from the last button */
+    .btn-group .btn:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Back Button -->
+    <button class="btn btn-secondary mb-4" onclick="goBack()">Back</button>
+
+    <h1>Results Page</h1>
+    <p>This is your results page. You can now add images, maps, graphs, or summary content here.</p>
+    
+    <!-- Buttons to switch content with custom 2mm spacing -->
+    <div class="btn-group" role="group" aria-label="Content Switcher">
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('graph')">Graph</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('result')">Result</button>
+    </div>
+    
+    <!-- Content Sections -->
+    <div id="image" class="content-section active">
+      <h3>Image Section</h3>
+      <img src="your-image.jpg" alt="Result Image" class="img-fluid">
+    </div>
+    <div id="graph" class="content-section">
+      <h3>Graph Section</h3>
+      <div id="graph-container">
+        <!-- Your graph content, e.g., a chart -->
+      </div>
+    </div>
+    <div id="result" class="content-section">
+      <h3>Result Section</h3>
+      <p>Your results will be displayed here.</p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Function to show the relevant content
+    function showContent(contentId) {
+      // Hide all content sections
+      $('.content-section').removeClass('active');
+      // Show the selected content
+      $('#' + contentId).addClass('active');
+    }
+
+    // Back button functionality
+    function goBack() {
+      window.history.back(); // Go back to the previous page in the browser history
+    }
+  </script>
+</body>
+</html>
