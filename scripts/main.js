@@ -10,10 +10,10 @@ import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 import { ScaleLine, MousePosition } from 'ol/control';
 import { createStringXY } from 'ol/coordinate';
 
-// --- WMS Base URL ---
+
 const WMS_URL = 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_06/wms';
 
-// --- Base Maps ---
+
 const osmBase = new TileLayer({
   title: 'OpenStreetMap',
   type: 'base',
@@ -36,7 +36,7 @@ const baseGroup = new Group({
   layers: [osmBase, darkBase]
 });
 
-// --- Helper: Create WMS Layer ---
+
 function createWMSLayer(name, title, visible = false) {
   return new TileLayer({
     title: title,
@@ -50,7 +50,15 @@ function createWMSLayer(name, title, visible = false) {
   });
 }
 
-// --- Averages Group ---
+const dec2022Group = new Group({
+  title: 'Pollutant Maps – Dec 2022',
+  layers: [
+    createWMSLayer('Italy_CAMS_no2_2022_12', 'NO₂ – Dec 2022'),
+    createWMSLayer('Italy_CAMS_pm10_2022_12', 'PM₁₀ – Dec 2022'),
+    createWMSLayer('Italy_CAMS_pm2p5_2022_12', 'PM₂.₅ – Dec 2022')
+  ]
+});
+
 const avgGroup = new Group({
   title: 'Air Quality Averages (2022)',
   layers: [
@@ -60,21 +68,54 @@ const avgGroup = new Group({
   ]
 });
 
-// --- Bivariate Group ---
-const bivariateGroup = new Group({
-  title: 'Bivariate Maps',
+const conc2020Group = new Group({
+  title: 'Pollutant Concentration – 2020',
   layers: [
-    createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate 2020')
+    createWMSLayer('Italy_no2_concentration_map_2020', 'NO₂ – Concentration 2020'),
+    createWMSLayer('Italy_pm10_concentration_map_2020', 'PM₁₀ – Concentration 2020'),
+    createWMSLayer('Italy_pm2p5_concentration_map_2020', 'PM₂.₅ – Concentration 2020')
   ]
 });
 
-// --- Overlay Group ---
-const overlayGroup = new Group({
-  title: 'Data Layers',
-  layers: [avgGroup, bivariateGroup]
+const aadGroup = new Group({
+  title: '2022 vs 2017–2021 Avg Diff',
+  layers: [
+    createWMSLayer('Italy_no2_2017-2021_AAD_map_2022', 'NO₂ AAD 2022'),
+    createWMSLayer('Italy_pm10_2017-2021_AAD_map_2022', 'PM₁₀ AAD 2022'),
+    createWMSLayer('Italy_pm2p5_2017-2021_AAD_map_2022', 'PM₂.₅ AAD 2022')
+  ]
 });
 
-// --- Initialize Map ---
+const lcGroup = new Group({
+  title: 'Land Cover',
+  layers: [
+    createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover – Reclassified 2022')
+  ]
+});
+
+const bivariateGroup = new Group({
+  title: 'Bivariate Maps',
+  layers: [
+    createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate 2020'),
+    createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate 2020'),
+    createWMSLayer('pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate 2020')
+  ]
+});
+
+
+const overlayGroup = new Group({
+  title: 'Data Layers',
+  layers: [
+    dec2022Group,
+    avgGroup,
+    conc2020Group,
+    aadGroup,
+    lcGroup,
+    bivariateGroup,
+  ]
+});
+
+
 const map = new Map({
   target: 'map',
   layers: [baseGroup, overlayGroup],
@@ -85,7 +126,7 @@ const map = new Map({
   })
 });
 
-// --- Controls ---
+
 map.addControl(new LayerSwitcher({ reverse: true, groupSelectStyle: 'group' }));
 map.addControl(new ScaleLine({ bar: true }));
 map.addControl(new MousePosition({
@@ -95,7 +136,7 @@ map.addControl(new MousePosition({
   target: document.getElementById('mouse-position')
 }));
 
-// --- Legend Logic ---
+
 function getAllTileWMSLayers(layerOrGroup) {
   let layers = [];
   if (layerOrGroup instanceof Group) {
@@ -121,22 +162,21 @@ function updateLegend(layer) {
   const legendURL = `${WMS_URL}?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=${layerName}&transparent=true`;
 
   legendDiv.innerHTML = `
-    <div class="legend-title"><strong>Legend: ${title}</strong></div>
-    <img src="${legendURL}" alt="Legend for ${title}" style="max-width:200px;">
-  `;
+  <img src="${legendURL}" alt="Legend" style="max-width:200px;">
+`;
 }
 
-// --- Show First Visible Legend ---
+
 const visibleLayer = tileWMSLayers.find(layer => layer.getVisible());
 if (visibleLayer) updateLegend(visibleLayer);
 
-// --- Update Legend on Layer Switch ---
+
 tileWMSLayers.forEach(layer => {
   layer.on('change:visible', () => {
     if (layer.getVisible()) {
-      // Hide all others
+  
       tileWMSLayers.forEach(l => { if (l !== layer) l.setVisible(false); });
       updateLegend(layer);
     }
   });
-});
+}); 

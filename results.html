@@ -28,6 +28,27 @@
     .btn-group .btn:last-child {
       margin-right: 0;
     }
+    
+    /* Style for the image container */
+    .image-container {
+      background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .image-container img {
+      width: 100%; /* Make the image responsive */
+      border-radius: 10px;
+    }
+
+    .image-caption {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -43,12 +64,18 @@
       <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
       <button type="button" class="btn btn-primary" onclick="showContent('graph')">Graph</button>
       <button type="button" class="btn btn-primary" onclick="showContent('result')">Result</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
+      <button type="button" class="btn btn-primary" onclick="showContent('image')">Image</button>
     </div>
     
-    <!-- Content Sections -->
-    <div id="image" class="content-section active">
-      <h3>Image Section</h3>
-      <img src="your-image.jpg" alt="Result Image" class="img-fluid">
+
+      <!-- Image Container for the 'average_2022' image -->
+      <div class="image-container">
+        <img src="images/Average_2022.png" alt="Average Air Quality in 2022" />
+      </div>
     </div>
     <div id="graph" class="content-section">
       <h3>Graph Section</h3>
