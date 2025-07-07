@@ -1,6 +1,19 @@
-const WMS_URL = 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_06/wms'
+import 'ol/ol.css';
+import { Map, View } from 'ol';
+import TileLayer from 'ol/layer/Tile';
+import Group from 'ol/layer/Group';
+import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
+import TileWMS from 'ol/source/TileWMS';
+import LayerSwitcher from 'ol-layerswitcher';
+import 'ol-layerswitcher/dist/ol-layerswitcher.css';
+import { ScaleLine, MousePosition } from 'ol/control';
+import { createStringXY } from 'ol/coordinate';
 
-// --- Base Maps ---
+
+const WMS_URL = 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_06/wms';
+
+
 const osmBase = new TileLayer({
   title: 'OpenStreetMap',
   type: 'base',
@@ -23,7 +36,7 @@ const baseGroup = new Group({
   layers: [osmBase, darkBase]
 });
 
-// Helper function to create WMS layer
+
 function createWMSLayer(name, title, visible = false) {
   return new TileLayer({
     title: title,
@@ -37,7 +50,6 @@ function createWMSLayer(name, title, visible = false) {
   });
 }
 
-// Layer groups for Dec 2022, Averages, etc.
 const dec2022Group = new Group({
   title: 'Pollutant Maps – Dec 2022',
   layers: [
@@ -90,7 +102,7 @@ const bivariateGroup = new Group({
   ]
 });
 
-// Group all layers together
+
 const overlayGroup = new Group({
   title: 'Data Layers',
   layers: [
@@ -103,7 +115,7 @@ const overlayGroup = new Group({
   ]
 });
 
-// Initialize the map
+
 const map = new Map({
   target: 'map',
   layers: [baseGroup, overlayGroup],
@@ -114,7 +126,7 @@ const map = new Map({
   })
 });
 
-// Controls
+
 map.addControl(new LayerSwitcher({ reverse: true, groupSelectStyle: 'group' }));
 map.addControl(new ScaleLine({ bar: true }));
 map.addControl(new MousePosition({
@@ -124,7 +136,7 @@ map.addControl(new MousePosition({
   target: document.getElementById('mouse-position')
 }));
 
-// Helper functions for updating legend
+
 function getAllTileWMSLayers(layerOrGroup) {
   let layers = [];
   if (layerOrGroup instanceof Group) {
@@ -142,7 +154,6 @@ function getAllTileWMSLayers(layerOrGroup) {
 
 const tileWMSLayers = getAllTileWMSLayers(overlayGroup);
 
-// Update the legend
 function updateLegend(layer) {
   const legendDiv = document.getElementById('legend');
   if (!layer || !layer.getSource || !(layer.getSource() instanceof TileWMS)) return;
@@ -163,9 +174,9 @@ if (visibleLayer) updateLegend(visibleLayer);
 tileWMSLayers.forEach(layer => {
   layer.on('change:visible', () => {
     if (layer.getVisible()) {
-    
+  
       tileWMSLayers.forEach(l => { if (l !== layer) l.setVisible(false); });
       updateLegend(layer);
     }
   });
-});
+}); 

@@ -1,23 +1,81 @@
+ <!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>WebGIS Map with Dynamic Legend</title>
-
-    <!-- Add OpenLayers CSS from CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.css" type="text/css">
-
-    <!-- Add OpenLayers JS from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
-
-    <!-- Your other CSS files -->
-    <link rel="stylesheet" href="css/main.css">
-
+  <meta charset="UTF-8">
+  <title>WebGIS Map with Dynamic Legend</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher/dist/ol-layerswitcher.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
-
 <body>
-    <div id="map" class="map"></div>
-    <div id="legend"></div>
-    <div id="mouse-position"></div>
 
-    <script src="scripts/main.js"></script>
+  <!-- Back Button -->
+  <div class="container">
+    <button class="btn btn-secondary mb-4" onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map" class="map"></div>
+
+  <!-- Dynamic Legend (bottom-left) -->
+  <div id="legend" class="legend-box"></div>
+
+  <!-- Mouse Coordinates (bottom-right) -->
+  <div id="mouse-position" class="mouse-position"></div>
+
+  <!-- OpenLayers & LayerSwitcher scripts -->
+  <script type="module" src="scripts/main.js"></script>
+
+  <script>
+    // Define your map layers
+    const baseLayer = new ol.layer.Tile({
+      source: new ol.source.OSM(),
+      title: 'OpenStreetMap', // Title for the base layer
+    });
+
+    const vectorLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        url: 'data.geojson', // Your GeoJSON or vector data source
+        format: new ol.format.GeoJSON(),
+      }),
+      title: 'PM10 2022', // Title for the vector layer (we will hide this in the legend)
+    });
+
+    // Create the map
+    const map = new ol.Map({
+      target: 'map',
+      layers: [baseLayer, vectorLayer],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 4,
+      }),
+    });
+
+    // Add LayerSwitcher control to the map
+    const layerSwitcher = new ol.control.LayerSwitcher({
+      showRoot: false,  // This hides the root layer name in the legend
+      groupSelectStyle: 'none', // Optionally remove group selection style
+    });
+    map.addControl(layerSwitcher);
+
+    // Custom Legend (without layer names)
+    const legend = document.getElementById('legend');
+    
+    // Function to add items to the legend, excluding the layer names
+    map.getLayers().forEach(function(layer) {
+      const listItem = document.createElement('div');
+      listItem.style.backgroundColor = layer.get('layerColor') || 'gray'; // Use a color or style for the legend
+
+      // Here we do NOT add the layer title to remove the "Legend: PM10 2022" text
+      // This ensures no layer names like "PM10 2022" are shown
+      legend.appendChild(listItem);
+    });
+
+    // Back button functionality
+    function goBack() {
+      window.history.back(); // Go back to the previous page in the browser history
+    }
+  </script>
+
 </body>
-
+</html>
