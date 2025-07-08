@@ -1,7 +1,6 @@
 {
   "name": "photo-perfect",
   "version": "1.0.0",
-  "description": "",
   "main": "index.html",
   "scripts": {
     "dev": "vite",
@@ -14,6 +13,19 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
-    "ol-layerswitcher": "^4.1.2"
-  }
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "ol-layerswitcher": "^4.1.2",
+    "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mobinafaraji/GIS-PROJECT.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mobinafaraji/GIS-PROJECT/issues"
+  },
+  "homepage": "https://github.com/mobinafaraji/GIS-PROJECT#readme",
+  "description": ""
 }
