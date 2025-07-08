@@ -83,3 +83,14 @@
   color: #555;
   font-size: 15px;
 }
+.layer-switcher {
+  font-family: 'Arimo', sans-serif !important;
+}
+
+.layer-switcher .panel {
+  font-family: 'Arimo', sans-serif !important;
+}
+
+.layer-switcher .panel input + label {
+  font-family: 'Arimo', sans-serif !important;
+}

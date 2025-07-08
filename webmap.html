@@ -1,5 +1,6 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>WebGIS Map with Dynamic Legend</title>
@@ -8,7 +9,9 @@
   <link rel="stylesheet" href="css/ol-layerswitcher.css">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher/dist/ol-layerswitcher.css"> -->
   <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
   <!-- Back Button -->
@@ -62,9 +65,9 @@
 
     // Custom Legend (without layer names)
     const legend = document.getElementById('legend');
-    
+
     // Function to add items to the legend, excluding the layer names
-    map.getLayers().forEach(function(layer) {
+    map.getLayers().forEach(function (layer) {
       const listItem = document.createElement('div');
       listItem.style.backgroundColor = layer.get('layerColor') || 'gray'; // Use a color or style for the legend
 
