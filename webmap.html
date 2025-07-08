@@ -32,50 +32,176 @@
   <script src="https://cdn.jsdelivr.net/npm/ol-layerswitcher@latest"></script>
 
   <script>
-    // Define your map layers
-    const baseLayer = new ol.layer.Tile({
-      source: new ol.source.OSM(),
-      title: 'OpenStreetMap', // Title for the base layer
+    // WMS URL
+    const WMS_URL = 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_06/wms';
+
+    // Base layers
+    const osmBase = new ol.layer.Tile({
+      title: 'OpenStreetMap',
+      type: 'base',
+      visible: true,
+      source: new ol.source.OSM()
     });
 
-    const vectorLayer = new ol.layer.Vector({
-      source: new ol.source.Vector({
-        url: 'data.geojson', // Your GeoJSON or vector data source
-        format: new ol.format.GeoJSON(),
-      }),
-      title: 'PM10 2022', // Title for the vector layer (we will hide this in the legend)
-      // Example color for legend
-      layerColor: '#ffcc00'
+    const darkBase = new ol.layer.Tile({
+      title: 'Dark Matter (Carto)',
+      type: 'base',
+      visible: false,
+      source: new ol.source.XYZ({
+        url: 'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+        attributions: '© CartoDB'
+      })
     });
 
-    // Create the map
+    const baseGroup = new ol.layer.Group({
+      title: 'Base Maps',
+      layers: [osmBase, darkBase]
+    });
+
+    // Helper to create WMS layers
+    function createWMSLayer(name, title, visible = false) {
+      return new ol.layer.Tile({
+        title: title,
+        visible: visible,
+        source: new ol.source.TileWMS({
+          url: WMS_URL,
+          params: { 'LAYERS': `gisgeoserver_06:${name}`, 'TILED': true },
+          serverType: 'geoserver',
+          crossOrigin: 'anonymous'
+        })
+      });
+    }
+
+    // Overlay groups
+    const dec2022Group = new ol.layer.Group({
+      title: 'Pollutant Maps – Dec 2022',
+      layers: [
+        createWMSLayer('Italy_CAMS_no2_2022_12', 'NO₂ – Dec 2022'),
+        createWMSLayer('Italy_CAMS_pm10_2022_12', 'PM₁₀ – Dec 2022'),
+        createWMSLayer('Italy_CAMS_pm2p5_2022_12', 'PM₂.₅ – Dec 2022')
+      ]
+    });
+
+    const avgGroup = new ol.layer.Group({
+      title: 'Air Quality Averages (2022)',
+      layers: [
+        createWMSLayer('Italy_average_no2_2022', 'NO₂ 2022', true),
+        createWMSLayer('Italy_average_pm10_2022', 'PM₁₀ 2022'),
+        createWMSLayer('Italy_average_pm2p5_2022', 'PM₂.₅ 2022')
+      ]
+    });
+
+    const conc2020Group = new ol.layer.Group({
+      title: 'Pollutant Concentration – 2020',
+      layers: [
+        createWMSLayer('Italy_no2_concentration_map_2020', 'NO₂ – Concentration 2020'),
+        createWMSLayer('Italy_pm10_concentration_map_2020', 'PM₁₀ – Concentration 2020'),
+        createWMSLayer('Italy_pm2p5_concentration_map_2020', 'PM₂.₅ – Concentration 2020')
+      ]
+    });
+
+    const aadGroup = new ol.layer.Group({
+      title: '2022 vs 2017–2021 Avg Diff',
+      layers: [
+        createWMSLayer('Italy_no2_2017-2021_AAD_map_2022', 'NO₂ AAD 2022'),
+        createWMSLayer('Italy_pm10_2017-2021_AAD_map_2022', 'PM₁₀ AAD 2022'),
+        createWMSLayer('Italy_pm2p5_2017-2021_AAD_map_2022', 'PM₂.₅ AAD 2022')
+      ]
+    });
+
+    const lcGroup = new ol.layer.Group({
+      title: 'Land Cover',
+      layers: [
+        createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover – Reclassified 2022')
+      ]
+    });
+
+    const bivariateGroup = new ol.layer.Group({
+      title: 'Bivariate Maps',
+      layers: [
+        createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate 2020'),
+        createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate 2020'),
+        createWMSLayer('pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate 2020')
+      ]
+    });
+
+    const overlayGroup = new ol.layer.Group({
+      title: 'Data Layers',
+      layers: [
+        dec2022Group,
+        avgGroup,
+        conc2020Group,
+        aadGroup,
+        lcGroup,
+        bivariateGroup,
+      ]
+    });
+
+    // Map
     const map = new ol.Map({
       target: 'map',
-      layers: [baseLayer, vectorLayer],
+      layers: [baseGroup, overlayGroup],
       view: new ol.View({
-        center: [0, 0],
-        zoom: 4,
-      }),
+        center: [1300000, 5100000],
+        zoom: 6,
+        projection: 'EPSG:3857'
+      })
     });
 
-    // Add LayerSwitcher control to the map
-    const layerSwitcher = new ol.control.LayerSwitcher({
-      showRoot: false,
-      groupSelectStyle: 'none',
-    });
-    map.addControl(layerSwitcher);
+    // LayerSwitcher
+    map.addControl(new ol.control.LayerSwitcher({ reverse: true, groupSelectStyle: 'group' }));
 
-    // Custom Legend (without layer names)
-    const legend = document.getElementById('legend');
-    map.getLayers().forEach(function (layer) {
-      if (layer.get('layerColor')) {
-        const listItem = document.createElement('div');
-        listItem.style.backgroundColor = layer.get('layerColor');
-        listItem.style.width = '24px';
-        listItem.style.height = '24px';
-        listItem.style.marginBottom = '4px';
-        legend.appendChild(listItem);
+    // ScaleLine
+    map.addControl(new ol.control.ScaleLine({ bar: true }));
+
+    // MousePosition
+    map.addControl(new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(4),
+      projection: 'EPSG:4326',
+      className: 'custom-mouse-position',
+      target: document.getElementById('mouse-position')
+    }));
+
+    // Helper to get all TileWMS layers recursively
+    function getAllTileWMSLayers(layerOrGroup) {
+      let layers = [];
+      if (layerOrGroup instanceof ol.layer.Group) {
+        layerOrGroup.getLayers().forEach(function(innerLayer) {
+          layers = layers.concat(getAllTileWMSLayers(innerLayer));
+        });
+      } else if (layerOrGroup instanceof ol.layer.Tile) {
+        const source = layerOrGroup.getSource && layerOrGroup.getSource();
+        if (source instanceof ol.source.TileWMS) {
+          layers.push(layerOrGroup);
+        }
       }
+      return layers;
+    }
+
+    const tileWMSLayers = getAllTileWMSLayers(overlayGroup);
+
+    // Legend logic
+    function updateLegend(layer) {
+      const legendDiv = document.getElementById('legend');
+      if (!layer || !layer.getSource || !(layer.getSource() instanceof ol.source.TileWMS)) return;
+      const title = layer.get('title');
+      const layerName = layer.getSource().getParams().LAYERS;
+      const legendURL = `${WMS_URL}?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=${layerName}&transparent=true`;
+      legendDiv.innerHTML = `<img src="${legendURL}" alt="Legend" style="max-width:200px;">`;
+    }
+
+    // Show legend for the first visible layer
+    const visibleLayer = tileWMSLayers.find(function(layer) { return layer.getVisible(); });
+    if (visibleLayer) updateLegend(visibleLayer);
+
+    // Update legend and visibility on layer change
+    tileWMSLayers.forEach(function(layer) {
+      layer.on('change:visible', function() {
+        if (layer.getVisible()) {
+          tileWMSLayers.forEach(function(l) { if (l !== layer) l.setVisible(false); });
+          updateLegend(layer);
+        }
+      });
     });
 
     // Back button functionality
