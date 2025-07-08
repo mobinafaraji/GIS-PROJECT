@@ -1,14 +1,16 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>WebGIS Map with Dynamic Legend</title>
-  <link rel="stylesheet" href="css/ol.css">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css"> -->
-  <link rel="stylesheet" href="css/ol-layerswitcher.css">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher/dist/ol-layerswitcher.css"> -->
+  <!-- OpenLayers CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+  <!-- LayerSwitcher CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher@latest/dist/ol-layerswitcher.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 
   <!-- Back Button -->
@@ -25,8 +27,9 @@
   <!-- Mouse Coordinates (bottom-right) -->
   <div id="mouse-position" class="mouse-position"></div>
 
-  <!-- OpenLayers & LayerSwitcher scripts -->
-  <script type="module" src="scripts/main.js"></script>
+  <!-- OpenLayers & LayerSwitcher scripts from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ol-layerswitcher@latest"></script>
 
   <script>
     // Define your map layers
@@ -41,6 +44,8 @@
         format: new ol.format.GeoJSON(),
       }),
       title: 'PM10 2022', // Title for the vector layer (we will hide this in the legend)
+      // Example color for legend
+      layerColor: '#ffcc00'
     });
 
     // Create the map
@@ -55,29 +60,29 @@
 
     // Add LayerSwitcher control to the map
     const layerSwitcher = new ol.control.LayerSwitcher({
-      showRoot: false,  // This hides the root layer name in the legend
-      groupSelectStyle: 'none', // Optionally remove group selection style
+      showRoot: false,
+      groupSelectStyle: 'none',
     });
     map.addControl(layerSwitcher);
 
     // Custom Legend (without layer names)
     const legend = document.getElementById('legend');
-    
-    // Function to add items to the legend, excluding the layer names
-    map.getLayers().forEach(function(layer) {
-      const listItem = document.createElement('div');
-      listItem.style.backgroundColor = layer.get('layerColor') || 'gray'; // Use a color or style for the legend
-
-      // Here we do NOT add the layer title to remove the "Legend: PM10 2022" text
-      // This ensures no layer names like "PM10 2022" are shown
-      legend.appendChild(listItem);
+    map.getLayers().forEach(function (layer) {
+      if (layer.get('layerColor')) {
+        const listItem = document.createElement('div');
+        listItem.style.backgroundColor = layer.get('layerColor');
+        listItem.style.width = '24px';
+        listItem.style.height = '24px';
+        listItem.style.marginBottom = '4px';
+        legend.appendChild(listItem);
+      }
     });
 
     // Back button functionality
     function goBack() {
-      window.history.back(); // Go back to the previous page in the browser history
+      window.history.back();
     }
   </script>
-
 </body>
+
 </html>
