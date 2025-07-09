@@ -53,52 +53,52 @@ function createWMSLayer(name, title, visible = false) {
 const dec2022Group = new Group({
   title: 'Pollutant Maps – Dec 2022',
   layers: [
-    createWMSLayer('Italy_CAMS_no2_2022_12', 'NO₂ – Dec 2022'),
-    createWMSLayer('Italy_CAMS_pm10_2022_12', 'PM₁₀ – Dec 2022'),
-    createWMSLayer('Italy_CAMS_pm2p5_2022_12', 'PM₂.₅ – Dec 2022')
+    createWMSLayer('Italy_CAMS_no2_2022_12', 'NO₂ – Avg Conc. (12/2022)'),
+    createWMSLayer('Italy_CAMS_pm10_2022_12', 'PM₁₀ – Avg Conc. (12/2022)'),
+    createWMSLayer('Italy_CAMS_pm2p5_2022_12', 'PM₂.₅ – Avg Conc. (12/2022)')
   ]
 });
 
 const avgGroup = new Group({
   title: 'Air Quality Averages (2022)',
   layers: [
-    createWMSLayer('Italy_average_no2_2022', 'NO₂ 2022', true),
-    createWMSLayer('Italy_average_pm10_2022', 'PM₁₀ 2022'),
-    createWMSLayer('Italy_average_pm2p5_2022', 'PM₂.₅ 2022')
+    createWMSLayer('Italy_average_no2_2022', 'NO₂-Avg Conc. (2022)', true),
+    createWMSLayer('Italy_average_pm10_2022', 'PM₁₀-Avg Conc. (2022)'),
+    createWMSLayer('Italy_average_pm2p5_2022', 'PM₂.₅-Avg Conc. (2022)')
   ]
 });
 
 const conc2020Group = new Group({
   title: 'Pollutant Concentration – 2020',
   layers: [
-    createWMSLayer('Italy_no2_concentration_map_2020', 'NO₂ – Concentration 2020'),
-    createWMSLayer('Italy_pm10_concentration_map_2020', 'PM₁₀ – Concentration 2020'),
-    createWMSLayer('Italy_pm2p5_concentration_map_2020', 'PM₂.₅ – Concentration 2020')
+    createWMSLayer('Italy_no2_concentration_map_2020', 'NO₂ – EU Classes level (2020)'),
+    createWMSLayer('Italy_pm10_concentration_map_2020', 'PM₁₀ – EU Classes level (2020)'),
+    createWMSLayer('Italy_pm2p5_concentration_map_2020', 'PM₂.₅ – EU Classes level (2020)')
   ]
 });
 
 const aadGroup = new Group({
   title: '2022 vs 2017–2021 Avg Diff',
   layers: [
-    createWMSLayer('Italy_no2_2017-2021_AAD_map_2022', 'NO₂ AAD 2022'),
-    createWMSLayer('Italy_pm10_2017-2021_AAD_map_2022', 'PM₁₀ AAD 2022'),
-    createWMSLayer('Italy_pm2p5_2017-2021_AAD_map_2022', 'PM₂.₅ AAD 2022')
+    createWMSLayer('Italy_no2_2017-2021_AAD_map_2022', 'NO₂ Δ from 5 year mean'),
+    createWMSLayer('Italy_pm10_2017-2021_AAD_map_2022', 'PM₁₀ Δ from 5 year mean'),
+    createWMSLayer('Italy_pm2p5_2017-2021_AAD_map_2022', 'PM₂.₅ Δ from 5 year mean')
   ]
 });
 
 const lcGroup = new Group({
   title: 'Land Cover',
   layers: [
-    createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover – Reclassified 2022')
+    createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover Classess'),
   ]
 });
 
 const bivariateGroup = new Group({
   title: 'Bivariate Maps',
   layers: [
-    createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate 2020'),
-    createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate 2020'),
-    createWMSLayer('pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate 2020')
+    createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate map 2020'),
+    createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate map 2020'),
+    createWMSLayer('Italy_pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate map 2020')
   ]
 });
 
@@ -118,7 +118,7 @@ const overlayGroup = new Group({
 
 const map = new Map({
   target: 'map',
-  layers: [baseGroup, overlayGroup],
+  layers: [overlayGroup, baseGroup], 
   view: new View({
     center: [1300000, 5100000],
     zoom: 6,
@@ -127,7 +127,7 @@ const map = new Map({
 });
 
 
-map.addControl(new LayerSwitcher({ reverse: true, groupSelectStyle: 'group' }));
+map.addControl(new LayerSwitcher({ reverse:false, groupSelectStyle: 'group' }));
 map.addControl(new ScaleLine({ bar: true }));
 map.addControl(new MousePosition({
   coordinateFormat: createStringXY(4),

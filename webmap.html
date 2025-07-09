@@ -9,6 +9,7 @@
   <!-- LayerSwitcher CSS from CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher@latest/dist/ol-layerswitcher.css">
   <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -166,7 +167,7 @@
     function getAllTileWMSLayers(layerOrGroup) {
       let layers = [];
       if (layerOrGroup instanceof ol.layer.Group) {
-        layerOrGroup.getLayers().forEach(function(innerLayer) {
+        layerOrGroup.getLayers().forEach(function (innerLayer) {
           layers = layers.concat(getAllTileWMSLayers(innerLayer));
         });
       } else if (layerOrGroup instanceof ol.layer.Tile) {
@@ -191,14 +192,14 @@
     }
 
     // Show legend for the first visible layer
-    const visibleLayer = tileWMSLayers.find(function(layer) { return layer.getVisible(); });
+    const visibleLayer = tileWMSLayers.find(function (layer) { return layer.getVisible(); });
     if (visibleLayer) updateLegend(visibleLayer);
 
     // Update legend and visibility on layer change
-    tileWMSLayers.forEach(function(layer) {
-      layer.on('change:visible', function() {
+    tileWMSLayers.forEach(function (layer) {
+      layer.on('change:visible', function () {
         if (layer.getVisible()) {
-          tileWMSLayers.forEach(function(l) { if (l !== layer) l.setVisible(false); });
+          tileWMSLayers.forEach(function (l) { if (l !== layer) l.setVisible(false); });
           updateLegend(layer);
         }
       });

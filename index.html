@@ -44,6 +44,73 @@
     .text-box .btn {
       margin-top: 10px;
     }
+
+    /* Hero Section with a single image */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Overlay Text */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-text {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .hero-section:hover .hero-overlay {
+      opacity: 1;
+    }
+
+    /* Info Boxes Section Styling */
+    .info-box {
+      background: #f1f1f1;
+      /* Light gray background */
+      color: #333;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-box h4 {
+      font-size: 1.5em;
+    }
+
+    .info-box p {
+      font-size: 1.2em;
+    }
+
+    .info-box img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
@@ -55,7 +122,6 @@
       <div class="pp-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
-
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -64,7 +130,7 @@
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
-                <li class="nav-item"><a class="nav-link" href="webmap.html">Web Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="webmap.html">WebGIS</a></li>
               </ul>
             </div>
           </div>
@@ -76,45 +142,35 @@
     <div class="page-content">
       <div class="container py-5">
 
-        <!-- Text Box Container -->
-        <div class="text-box">
-          <h1 class="text-center mb-4">Welcome to Our Air Quality WebGIS</h1>
 
-          <!-- Background Image Section -->
-          <div class="hero-section">
-            <div class="hero-overlay">
-              <div class="hero-text">
-                <h1>Explore Air Quality in Italy</h1>
-              </div>
+        <!-- Hero Section with a single image -->
+        <div class="hero-section" id="heroSection">
+          <img id="heroImage" src="images/Home_page_image.jpg" alt="Air Quality Image 1">
+          <!-- Overlay Text -->
+          <div class="hero-overlay">
+            <div class="hero-text">
+              <h1>Breathing Numbers: Mapping Air Pollution and Population Exposure in Italy
             </div>
           </div>
-
-          <p class="text-center lead">Explore interactive maps and analysis of air pollution across Italy.</p>
-          <p>
-          </p>
-          <p class="text-center">
-            Air pollution is a critical environmental concern, significantly impacting public health and the natural
-            ecosystem, particularly in urban and industrial regions. In Italy, pollutants such as nitrogen dioxide
-            (NO₂), particulate matter (PM₁₀ and PM₂.₅) frequently surpass the recommended safety limits, with
-            concentrations notably high in the Po Valley and major metropolitan areas.These elevated pollutant levels
-            are linked to a range of health issues, including respiratory diseases, cardiovascular conditions, and a
-            decline in overall quality of life.
-          </p>
-          <p class="text-center">
-            This WebGIS project provides a comprehensive spatial analysis of air quality across Italy, leveraging
-            QGIS-based map styling, GeoServer publishing, and OpenLayers integration. The platform enables users to
-            visualize and interact with air pollution data through dynamic maps, offering real-time pollutant
-            concentration insights. It also incorporates interactive features such as dynamic legends and layer
-            switchers, designed to facilitate data exploration. The goal of this project is to support informed
-            decision-making, enhance public awareness, and contribute to effective environmental monitoring and policy
-            formulation.
-          </p>
-
-          <div class="text-center mt-5">
-            <a href="results.html" class="btn btn-primary btn-lg m-2">View Results</a>
-            <a href="webmap.html" class="btn btn-success btn-lg m-2">Launch Web Map</a>
-          </div>
         </div>
+
+
+
+
+        <p class="text-center">
+          Air pollution is a major environmental issue, affecting public health and ecosystems, especially in urban and
+          industrial areas. In Italy, pollutants like nitrogen dioxide (NO₂) and particulate matter (PM₁₀, PM₂.₅) often
+          exceed safety limits, particularly in the Po Valley and major cities. These high pollutant levels contribute
+          to health problems like respirator and lower quality of life.
+        </p>
+        <p class="text-center">
+          This Web-GIS project offers a spatial analysis of air quality across Italy, using QGIS, Geo-Server, and
+          OpenLayers. The platform lets users visualize and interact with real-time pollution data through dynamic maps,
+          complete with features like dynamic legends and layer switchers. The aim is to support decision-making, raise
+          public awareness, and improve environmental monitoring and policy.
+        </p>
+
+
 
       </div>
     </div>
@@ -125,6 +181,7 @@
         <div class="col-md-4 mb-4">
           <div class="info-box p-4 h-100">
             <h4>Danila Larionov</h4>
+            <img src="images/IMG_9353.JPG" class="img-fluid rounded mb-2" alt="Danila" />
             <p>Master student of Urban planning and policy design<br>Politecnico di Milano</p>
           </div>
         </div>
@@ -138,10 +195,8 @@
         <div class="col-md-4 mb-4">
           <div class="info-box p-4 h-100">
             <h4>Patrick Logan Kennedy</h4>
-            <ul class="list-unstyled">
-              <li>Master student of Urban planning and policy design</li>
-              <li>Politecnico di Milano</li>
-            </ul>
+            <img src="images/patrick.jpg" class="img-fluid rounded mb-2" alt="Patrick" />
+            <p>Master student of Urban planning and policy design<br>Politecnico di Milano</p>
           </div>
         </div>
       </div>
@@ -158,6 +213,7 @@
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.bundle.min.js"></script>
     <script src="scripts/main.js"></script>
+
   </div>
 </body>
 
