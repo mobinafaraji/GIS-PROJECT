@@ -113,19 +113,18 @@
     const lcGroup = new ol.layer.Group({
       title: 'Land Cover',
       layers: [
-        createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover Classess'),
+        createWMSLayer('Italy_LC_reclassified_2022', 'Land Cover Classess')
       ]
     });
 
     const bivariateGroup = new ol.layer.Group({
       title: 'Bivariate Maps',
       layers: [
-        createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate map 2020'),
-        createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate map 2020'),
-        createWMSLayer('Italy_pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate map 2020')
+        createWMSLayer('Italy_no2_2020_bivariate_map', 'NO₂ Bivariate 2020'),
+        createWMSLayer('Italy_pm10_2020_bivariate_map', 'PM₁₀ Bivariate 2020'),
+        createWMSLayer('pm2p5_2020_bivariate_map', 'PM₂.₅ Bivariate 2020')
       ]
     });
-
 
     const overlayGroup = new ol.layer.Group({
       title: 'Data Layers',
@@ -142,7 +141,7 @@
     // Map
     const map = new ol.Map({
       target: 'map',
-      layers: [overlayGroup, baseGroup],
+      layers: [baseGroup, overlayGroup],
       view: new ol.View({
         center: [1300000, 5100000],
         zoom: 6,
