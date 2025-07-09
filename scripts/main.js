@@ -118,7 +118,7 @@ const overlayGroup = new Group({
 
 const map = new Map({
   target: 'map',
-  layers: [baseGroup, overlayGroup],
+  layers: [overlayGroup, baseGroup], 
   view: new View({
     center: [1300000, 5100000],
     zoom: 6,
