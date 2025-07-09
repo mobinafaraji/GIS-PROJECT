@@ -9,6 +9,7 @@
   <!-- LayerSwitcher CSS from CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher@latest/dist/ol-layerswitcher.css">
   <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -67,15 +68,15 @@
 
     // Custom Legend (without layer names)
     const legend = document.getElementById('legend');
+
+    // Function to add items to the legend, excluding the layer names
     map.getLayers().forEach(function (layer) {
-      if (layer.get('layerColor')) {
-        const listItem = document.createElement('div');
-        listItem.style.backgroundColor = layer.get('layerColor');
-        listItem.style.width = '24px';
-        listItem.style.height = '24px';
-        listItem.style.marginBottom = '4px';
-        legend.appendChild(listItem);
-      }
+      const listItem = document.createElement('div');
+      listItem.style.backgroundColor = layer.get('layerColor') || 'gray'; // Use a color or style for the legend
+
+      // Here we do NOT add the layer title to remove the "Legend: PM10 2022" text
+      // This ensures no layer names like "PM10 2022" are shown
+      legend.appendChild(listItem);
     });
 
     // Back button functionality
