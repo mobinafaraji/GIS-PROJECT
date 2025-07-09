@@ -118,7 +118,7 @@ const overlayGroup = new Group({
 
 const map = new Map({
   target: 'map',
-  layers: [overlayGroup, baseGroup], 
+  layers: [overlayGroup, baseGroup],
   view: new View({
     center: [1300000, 5100000],
     zoom: 6,
@@ -127,7 +127,7 @@ const map = new Map({
 });
 
 
-map.addControl(new LayerSwitcher({ reverse:false, groupSelectStyle: 'group' }));
+map.addControl(new LayerSwitcher({ reverse: false, groupSelectStyle: 'group' }));
 map.addControl(new ScaleLine({ bar: true }));
 map.addControl(new MousePosition({
   coordinateFormat: createStringXY(4),
@@ -174,7 +174,7 @@ if (visibleLayer) updateLegend(visibleLayer);
 tileWMSLayers.forEach(layer => {
   layer.on('change:visible', () => {
     if (layer.getVisible()) {
-  
+
       tileWMSLayers.forEach(l => { if (l !== layer) l.setVisible(false); });
       updateLegend(layer);
     }

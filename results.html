@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Results</title>
@@ -75,76 +76,135 @@
 
     /* Styling for the combined Images 6 and 7 */
     .combined-images img {
-      margin-bottom: 2mm; /* Space between image 6 and image 7 */
+      margin-bottom: 2mm;
+      /* Space between image 6 and image 7 */
     }
 
     /* Styling for the new image legend_8 */
     .legend-image {
-      margin-top: 2mm; /* Space below Image 6 */
+      margin-top: 2mm;
+      /* Space below Image 6 */
     }
-
   </style>
 </head>
+
 <body>
   <div class="container">
     <!-- Back Button -->
     <button class="btn btn-secondary mb-4" onclick="goBack()">Back</button>
-    <p>Explore Air Quality Data: A deep dive into pollutant trends, their effects, and the spatial distribution of air quality in Italian cities</p>
-    
+    <p>Explore Air Quality Data: A deep dive into pollutant trends, their effects, and the spatial distribution of air
+      quality in Italian cities</p>
+
     <!-- Buttons to show respective images -->
     <div class="btn-group" role="group" aria-label="Content Switcher">
-      <button type="button" class="btn btn-primary" onclick="showImage('Italy_dec_2022_results')">Pollutant Maps-Dec 2022</button>
-      <button type="button" class="btn btn-primary" onclick="showImage('Italy_2022_results')">Air Quality Averages 2022</button>
-      <button type="button" class="btn btn-primary" onclick="showImage('Italy_average_2017-2021_AAD_results')">2020 vs 2017-2021 Avg Diff </button>
-      <button type="button" class="btn btn-primary" onclick="showImage('Italy_concentration_results')">Pollutant Concentration 2020</button>
-      <button type="button" class="btn btn-primary" onclick="showImage('Maps_results_5')">Pollution Concentration in Settlements</button>
-      <button type="button" class="btn btn-primary" onclick="showImage('Maps_results_6_7')">Population Exposure to Pollution</button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Italy_dec_2022_results')">Pollutant Maps-Dec
+        2022</button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Italy_2022_results')">Air Quality Averages
+        2022</button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Italy_average_2017-2021_AAD_results')">2020 vs
+        2017-2021 Avg Diff </button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Italy_concentration_results')">Pollutant
+        Concentration 2020</button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Maps_results_5')">Pollution Concentration in
+        Settlements</button>
+      <button type="button" class="btn btn-primary" onclick="showImage('Maps_results_6_7')">Population Exposure to
+        Pollution</button>
     </div>
 
     <!-- Image Containers for each image -->
     <div id="Italy_dec_2022_results" class="image-container">
       <img src="images/Italy_dec_2022_results.png" alt="Image 1: Yearly Average" />
       <div class="image-caption">
-        These maps show the concentrations of the chosen air pollutants in Italy, as measured in December 2022. In all three maps, the outline of the Po River valley (Pianura Padana) in the north is readily apparent. This region, known for its concentration of industry and economic activity, is additionally fated by geography to have troublesome air pollution thanks to its position in between the Alpine and Apennine mountains. These mountains trap stagnant air in the Pianura Padana, and the problem is especially acute in the winter months (as in the sampled month here), when increased emissions occur at the same time as frequent temperature inversions that trap the pollutants close to ground level.
+        These maps show the concentrations of the chosen air pollutants in Italy, as measured in December 2022. In all
+        three maps, the outline of the Po River valley (Pianura Padana) in the north is readily apparent. This region,
+        known for its concentration of industry and economic activity, is additionally fated by geography to have
+        troublesome air pollution thanks to its position in between the Alpine and Apennine mountains. These mountains
+        trap stagnant air in the Pianura Padana, and the problem is especially acute in the winter months (as in the
+        sampled month here), when increased emissions occur at the same time as frequent temperature inversions that
+        trap the pollutants close to ground level.
       </div>
     </div>
 
     <div id="Italy_2022_results" class="image-container">
       <img src="images/Italy_2022_results.png" alt="Image 2: 2022 Results" />
       <div class="image-caption">
-        These maps show the yearly average concentrations for the chosen pollutants. The relative geographic spread of the pollutants on a year-round basis is very similar to what we saw in the display depicting only December. What is noticeably different are the scales for the different pollutants. Whereas the top average concentration of the gas emission (NO2) is lower in December than it is on a year-round basis, the two aerosol pollutants (PM2.5 and PM10) see significantly higher top-end concentrations in December. This is possibly a reflection of the relative difference in emissions sources: whereas NO2 would be more heavily weighted toward automotive sources, fine and coarse (PM2.5 and PM10, respectively) aerosol emissions would additionally reflect home heating activity that peaks in cold weather months like December.
+        These maps show the yearly average concentrations for the chosen pollutants. The relative geographic spread of
+        the pollutants on a year-round basis is very similar to what we saw in the display depicting only December. What
+        is noticeably different are the scales for the different pollutants. Whereas the top average concentration of
+        the gas emission (NO2) is lower in December than it is on a year-round basis, the two aerosol pollutants (PM2.5
+        and PM10) see significantly higher top-end concentrations in December. This is possibly a reflection of the
+        relative difference in emissions sources: whereas NO2 would be more heavily weighted toward automotive sources,
+        fine and coarse (PM2.5 and PM10, respectively) aerosol emissions would additionally reflect home heating
+        activity that peaks in cold weather months like December.
       </div>
     </div>
 
     <div id="Italy_average_2017-2021_AAD_results" class="image-container">
       <img src="images/Italy_average_2017-2021_AAD_results.png" alt="Image 3: Average 2017-2021" />
       <div class="image-caption">
-        These maps depict the extent to which the concentration of the different pollutants varied in 2022 relative to the average of the prior five years. In other words, they ask whether “pollution” was “better” or “worse” in 2022 than it had been on a medium-term basis in the lead-up years. What we see is a geographic picture that is much less straightforward than other maps: in some of the most “polluted” places like the Pinaura Padana, measures of some pollutants like NO2 declined (in some cases, by a lot) while measures of aerosol pollutants tended to be somewhat higher. Meanwhile the obverse was true in most (but not all) of central and southern Italy, excluding large areas of Apulia, Abruzzo, Molise, and Campania. Almost all of Italy showed an increase in coarse particulate matter, except for a bowl-shaped part in the north-central area of the peninsula. The islands were a split decision: Sardinia saw a higher concentration of all three pollutants while most of Sicily saw an increase only in NO2 and PM10.
+        These maps depict the extent to which the concentration of the different pollutants varied in 2022 relative to
+        the average of the prior five years. In other words, they ask whether “pollution” was “better” or “worse” in
+        2022 than it had been on a medium-term basis in the lead-up years. What we see is a geographic picture that is
+        much less straightforward than other maps: in some of the most “polluted” places like the Pinaura Padana,
+        measures of some pollutants like NO2 declined (in some cases, by a lot) while measures of aerosol pollutants
+        tended to be somewhat higher. Meanwhile the obverse was true in most (but not all) of central and southern
+        Italy, excluding large areas of Apulia, Abruzzo, Molise, and Campania. Almost all of Italy showed an increase in
+        coarse particulate matter, except for a bowl-shaped part in the north-central area of the peninsula. The islands
+        were a split decision: Sardinia saw a higher concentration of all three pollutants while most of Sicily saw an
+        increase only in NO2 and PM10.
       </div>
     </div>
 
     <div id="Italy_concentration_results" class="image-container">
       <img src="images/Italy_concentration_results.png" alt="Image 4: Concentration Results" />
       <div class="image-caption">
-        These maps show the average annual figures for the three pollutants, displayed in classified ranges relative to the EU limits set for the concentration of each (40 for both NO2 and PM10 and 25 for PM2.5). As can be seen, no part of Italy exceeds the threshold for the former two pollutants on an average annualized basis (the possibility that these thresholds are exceeded on a spot basis for particular periods of time can’t be excluded). On the other hand, various spots in the Pianura Padana do exceed the limit for fine particulate matter; these localized over-concentrations can be observed especially in the vicinity of the cities of Milan and Verona, with smaller, localized nodes additionally present around Vicenza and Turin.
+        These maps show the average annual figures for the three pollutants, displayed in classified ranges relative to
+        the EU limits set for the concentration of each (40 for both NO2 and PM10 and 25 for PM2.5). As can be seen, no
+        part of Italy exceeds the threshold for the former two pollutants on an average annualized basis (the
+        possibility that these thresholds are exceeded on a spot basis for particular periods of time can’t be
+        excluded). On the other hand, various spots in the Pianura Padana do exceed the limit for fine particulate
+        matter; these localized over-concentrations can be observed especially in the vicinity of the cities of Milan
+        and Verona, with smaller, localized nodes additionally present around Vicenza and Turin.
       </div>
     </div>
 
     <div id="Maps_results_5" class="image-container">
       <img src="images/Maps_results_5.png" alt="Image 5: Another Image" />
-      <div class="image-caption">This graphic displays a map of Italy, classified into major categories of land cover types, and a chart showing the relative concentrations of each of the selected pollutants over a ten-year period. In combination with the previous maps, which showed the localized concentrations of the pollutants, this both explains and suggests some implications of our findings. Measures of pollution tended to be lowest in areas corresponding to the “forest” category, reflecting the relatively undeveloped nature of much of this area, but are worst in the urbanized (“settlement”) and – to a lesser extent – “agriculture” areas. This is indicative of a major public health issue, because these pollutants – especially fine particulate matter, due to its small size – can create or aggravate individual health problems and the problem is worst in Italy’s most densely populated areas. Moreover, the charts indicate a relative lack of progress in reducing the pollutants: the concentration of each is more-or-less where it was ten years prior. Some pollutants were slightly lower and some were slightly higher in 2022 than in 2013, and there were often significant variances in the intervening years, but in the aggregate the picture was little changed.
+      <div class="image-caption">This graphic displays a map of Italy, classified into major categories of land cover
+        types, and a chart showing the relative concentrations of each of the selected pollutants over a ten-year
+        period. In combination with the previous maps, which showed the localized concentrations of the pollutants, this
+        both explains and suggests some implications of our findings. Measures of pollution tended to be lowest in areas
+        corresponding to the “forest” category, reflecting the relatively undeveloped nature of much of this area, but
+        are worst in the urbanized (“settlement”) and – to a lesser extent – “agriculture” areas. This is indicative of
+        a major public health issue, because these pollutants – especially fine particulate matter, due to its small
+        size – can create or aggravate individual health problems and the problem is worst in Italy’s most densely
+        populated areas. Moreover, the charts indicate a relative lack of progress in reducing the pollutants: the
+        concentration of each is more-or-less where it was ten years prior. Some pollutants were slightly lower and some
+        were slightly higher in 2022 than in 2013, and there were often significant variances in the intervening years,
+        but in the aggregate the picture was little changed.
       </div>
     </div>
 
     <!-- Combined Images 6 & 7 in one container -->
-    <div id="Maps_results_6_7" class="image-container">
-      <div class="image-caption">Images 6 & 7 Combined</div>
-      <!-- Show both Image 6 and Image 7 in one section -->
+    <div id="Maps_results_6_7" class="image-container"> <!-- Show both Image 6 and Image 7 in one section -->
       <img src="images/Maps_results_6.png" alt="Image 6: Another Image" />
-      <div class="image-caption">This map shows the degree to which Italy’s population is exposed to the different pollutants, based on average concentration. A darker and bluer color signifies both a high population and high pollutant concentration; areas in red are those with low pollutant concentrations, with the brightest shaded areas having the highest population counts. As can be seen, there are large swaths of Italy with relatively limited NO2 exposure outside of the Pianura Padana; not surprisingly, it and the areas that we have focused on earlier are notable across all three pollutants here for having both high concentrations and high population counts. In respect of PM2.5 concentrations, virtually the whole of Italy sees a large degree of exposure, whereas with more coarse PM10 concentration the picture is more varied.
+      <div class="image-caption">This map shows the degree to which Italy’s population is exposed to the different
+        pollutants, based on average concentration. A darker and bluer color signifies both a high population and high
+        pollutant concentration; areas in red are those with low pollutant concentrations, with the brightest shaded
+        areas having the highest population counts. As can be seen, there are large swaths of Italy with relatively
+        limited NO2 exposure outside of the Pianura Padana; not surprisingly, it and the areas that we have focused on
+        earlier are notable across all three pollutants here for having both high concentrations and high population
+        counts. In respect of PM2.5 concentrations, virtually the whole of Italy sees a large degree of exposure,
+        whereas with more coarse PM10 concentration the picture is more varied.
       </div>
       <img src="images/Maps_results_7.png" alt="Image 7: Another Image" />
-      <div class="image-caption">These pie charts break down exposure to the different pollutants by looking at what percentage of the population lives in areas at different levels of exposure. In this context, a lower-numbered concentration level reflects “cleaner” air. These charts generally show that the majority – at or north of 95% in two of the three pollutant classes – live in areas that correspond to the two lowest levels of concentration. For the third pollutant, fine particulate matter, there is more spread among the different concentrations but in any case there is no population recorded as living in an area that exceeds the EU concentration limits referred to earlier.
+      <div class="image-caption">These pie charts break down exposure to the different pollutants by looking at what
+        percentage of the population lives in areas at different levels of exposure. In this context, a lower-numbered
+        concentration level reflects “cleaner” air. These charts generally show that the majority – at or north of 95%
+        in two of the three pollutant classes – live in areas that correspond to the two lowest levels of concentration.
+        For the third pollutant, fine particulate matter, there is more spread among the different concentrations but in
+        any case there is no population recorded as living in an area that exceeds the EU concentration limits referred
+        to earlier.
       </div>
     </div>
 
@@ -180,4 +240,5 @@
     };
   </script>
 </body>
+
 </html>
